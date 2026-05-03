@@ -1,0 +1,5 @@
+node_modules/
+.env
+*.log
+uploads/payment-slips/
+uploads/product-images/product-*
