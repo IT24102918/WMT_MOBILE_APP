@@ -1,4 +1,4 @@
-# Thowil Mobile — React Native (Expo SDK 52)
+# Thowil Mobile — React Native (Expo SDK 54)
 
 Mobile frontend for the Thowil platform, built with React Native + Expo Go compatible.  
 Mirrors the full feature set of the original React web frontend, rewritten for native mobile.
