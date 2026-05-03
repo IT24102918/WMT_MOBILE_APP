@@ -16,7 +16,13 @@ npm run build:web # export web build to dist
 npm start         # serve dist for Render/static web hosting
 ```
 
-The API base URL is resolved from `EXPO_PUBLIC_API_URL` when set. Otherwise, local Expo development automatically targets the backend host on port `8080`.
+The API base URL defaults to the deployed Render backend:
+
+```text
+https://wmt-mobile-app-3.onrender.com
+```
+
+You can still override it with `EXPO_PUBLIC_API_URL`. For local backend development, set `EXPO_PUBLIC_USE_LOCAL_API=true` before starting Expo.
 
 ### 1. Install dependencies
 ```bash
@@ -24,18 +30,9 @@ cd thowil-mobile
 npm install
 ```
 
-### 2. Set your backend IP
-Open `src/constants/theme.js` and change:
-```js
-export const API_BASE = 'http://192.168.1.100:8080'; // ← your machine's local IP
-```
-> **Important:** Use your computer's actual LAN IP (e.g. `192.168.1.x`), not `localhost`.
-> Find it with `ipconfig` (Windows) or `ifconfig` (Mac/Linux).
-> Both your phone and computer must be on the same Wi-Fi network.
-
-### 3. Start Expo
+### 2. Start Expo
 ```bash
-npm start
+npm run native
 ```
 Scan the QR code with **Expo Go** (v54) on your phone.
 

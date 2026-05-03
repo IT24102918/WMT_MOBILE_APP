@@ -1,7 +1,8 @@
 import Constants from 'expo-constants';
 
 const DEFAULT_API_PORT = '8080';
-const DEFAULT_TIMEOUT_MS = 10000;
+const DEPLOYED_API_BASE = 'https://wmt-mobile-app-3.onrender.com';
+const DEFAULT_TIMEOUT_MS = 30000;
 
 const stripTrailingSlash = (value = '') => value.replace(/\/+$/, '');
 
@@ -32,16 +33,21 @@ export const API_BASE = (() => {
     return stripTrailingSlash(envUrl);
   }
 
-  const devBase = buildDevApiBase();
-  if (devBase) {
-    return devBase;
+  const useLocalApi = process.env.EXPO_PUBLIC_USE_LOCAL_API?.trim().toLowerCase() === 'true';
+  if (useLocalApi) {
+    const devBase = buildDevApiBase();
+    if (devBase) {
+      return devBase;
+    }
+
+    return `http://localhost:${DEFAULT_API_PORT}`;
   }
 
-  return `http://localhost:${DEFAULT_API_PORT}`;
+  return DEPLOYED_API_BASE;
 })();
 
 export const NETWORK_TIMEOUT_MESSAGE =
-  'Network request timed out. Check that your phone and backend are on the same network, or set EXPO_PUBLIC_API_URL to a reachable API server.';
+  'Network request timed out. Check that the deployed backend is awake and reachable, or set EXPO_PUBLIC_API_URL to a reachable API server.';
 
 export const buildApiUrl = (path) => `${API_BASE}${path}`;
 
